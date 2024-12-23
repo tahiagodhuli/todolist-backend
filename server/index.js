@@ -7,7 +7,7 @@ require('dotenv').config(); // Load environment variables from .env file
 const taskRoutes = require('./routes/tasks'); // Import task routes
 
 const app = express();
-const PORT = 4000;  // Ensure the backend port is 4000
+const PORT = process.env.PORT || 4000; // Use Render's PORT variable or fallback to 4000
 
 // Middleware
 app.use(cors());  // Enable CORS to allow frontend on port 3000 to communicate with the backend
@@ -28,4 +28,4 @@ app.get('/', (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
