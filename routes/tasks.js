@@ -14,17 +14,15 @@ router.get('/', async (req, res) => {
 
 // Add a new task
 router.post('/', async (req, res) => {
-    const task = new Task({
-        text: req.body.text,
-    });
-
     try {
-        const newTask = await task.save();
-        res.status(201).json(newTask);
+        const newTask = new Task({ text: req.body.text });
+        const savedTask = await newTask.save();
+        res.status(201).json(savedTask); // Return the full task
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(400).json({ error: err.message });
     }
 });
+
 
 // Update a task
 router.put('/:id', async (req, res) => {
